@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohit Vishwaa | Full-Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="theme.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#0a0a0a',
+                        darker: '#050505',
+                        card: '#111111',
+                        accent: '#3b82f6',
+                        accentHover: '#2563eb'
+                    },
+                    animation: {
+                        'gradient': 'gradient 8s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        gradient: {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #f3f4f6;
+        }
+
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: rgba(17, 17, 17, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.15);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #60a5fa, #a78bfa, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            border-radius: 50%;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-accent selection:text-white relative overflow-x-hidden">
+    <div class="gold-particles" aria-hidden="true"></div>
+
+    <!-- Background glow effects -->
+    <div class="blob bg-blue-900 w-96 h-96 top-0 left-0"></div>
+    <div class="blob bg-purple-900 w-96 h-96 top-1/3 right-0" style="animation-delay: -2s;"></div>
+    <div class="blob bg-blue-900 w-80 h-80 bottom-0 left-1/4" style="animation-delay: -4s;"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed inset-x-0 top-0 z-50 px-3 pt-3 lg:px-8 lg:pt-5">
+        <div class="site-nav max-w-7xl mx-auto px-5 lg:px-7">
+            <div class="flex items-center justify-between h-[68px]">
+                <a href="#" class="brand-mark text-xl font-bold tracking-tight text-white transition-colors">
+                    <span class="brand-seal">R</span> Rohit<span class="text-blue-500">.</span>
+                </a>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-2">
+                        <a href="#about" class="nav-link">About</a>
+                        <a href="#projects" class="nav-link">Projects</a>
+                        <a href="#skills" class="nav-link">Skills</a>
+                        <a href="#experience" class="nav-link">Experience</a>
+                        <a href="#contact" class="nav-link nav-link-contact">Let's talk <i
+                                class="fas fa-arrow-up-right-from-square text-[10px]"></i></a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="menu-toggle focus:outline-none"
+                        aria-label="Open navigation menu">
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu panel -->
+        <div id="mobile-menu"
+            class="mobile-nav hidden md:hidden absolute inset-x-3 top-[88px] rounded-2xl p-3 lg:inset-x-8">
+            <div class="space-y-1 text-center">
+                <a href="#about" class="mobile-nav-link">About</a>
+                <a href="#projects" class="mobile-nav-link">Projects</a>
+                <a href="#skills" class="mobile-nav-link">Skills</a>
+                <a href="#experience" class="mobile-nav-link">Experience</a>
+                <a href="#contact" class="mobile-nav-link">Let's talk</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
+            <div class="flex-1 text-center lg:text-left z-10">
+                <div
+                    class="availability-badge inline-block px-4 py-1.5 rounded-full border text-sm font-medium mb-6 backdrop-blur-sm">
+                    Open to full-stack/frontend roles
+                </div>
+                <h1 class="text-5xl lg:text-7xl font-bold tracking-tight mb-6">
+                    Hi, I'm <br class="hidden lg:block">
+                    <span class="gradient-text">Rohit Vishwaa</span>
+                </h1>
+                <p class="text-lg lg:text-xl text-gray-400 mb-4 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Full-stack developer turning ideas into working products — from decoding raw government weather data
+                    to building AI-powered travel planners.
+                </p>
+                <p class="text-md text-gray-500 mb-10 font-medium">
+                    React · Node.js · MongoDB
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <a href="#projects"
+                        class="hero-projects-btn w-full sm:w-auto px-8 py-3 rounded-lg text-dark font-semibold hover:bg-gray-200 transition-colors text-center shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                        View Projects
+                    </a>
+                    <a href="resume.pdf" download="Rohit_Vishwa_Resume.pdf"
+                        class="w-full sm:w-auto px-8 py-3 rounded-lg border border-gray-600 text-white font-semibold hover:bg-gray-800 transition-colors text-center group">
+                        Download Resume
+                        <i class="fas fa-download ml-2 text-gray-400 group-hover:text-white transition-colors"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-photo-scene flex-1 flex justify-center z-10">
+                <div id="hero-photo-frame" class="relative w-64 h-64 lg:w-96 lg:h-96">
+                    <div
+                        class="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 blur-2xl opacity-40 animate-pulse">
+                    </div>
+                    <!-- Photo placeholder -->
+                    <div
+                        class="relative w-full h-full rounded-full border-4 border-gray-800 bg-card overflow-hidden shadow-2xl flex items-center justify-center z-10">
+                        <img src="profile.jpg" alt="Rohit Vishwaa"
+                            class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-[1.02]">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6 lg:px-8 bg-darker/50 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl lg:text-4xl font-bold mb-2">About Me</h2>
+            <div class="w-20 h-1 bg-blue-500 rounded mb-10"></div>
+
+            <div class="glass-card p-8 lg:p-10 rounded-2xl relative overflow-hidden">
+                <i class="fas fa-quote-left absolute text-8xl text-gray-800/30 -top-4 -left-4 z-0"></i>
+                <p class="text-gray-300 text-lg leading-relaxed relative z-10">
+                    I'm a full-stack developer who loves the process of building — from architecture decisions to the
+                    small UI details that make something feel finished. During my internship at the India Meteorological
+                    Department (IMD), I built a system that decoded raw SYNOP weather codes — data that, until then,
+                    only IMD staff could read — into plain, readable English, and shipped it as a working webpage.
+                </p>
+                <br>
+                <p class="text-gray-300 text-lg leading-relaxed relative z-10">
+                    Since then, I've built three full-stack projects spanning health-tech, meteorological data, and
+                    AI-powered travel planning. I'm big on hackathons and always looking for the next problem to dig
+                    into — currently on the lookout for full-stack/frontend opportunities where I can keep building
+                    things people actually use.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 px-6 lg:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl lg:text-4xl font-bold mb-2">Projects</h2>
+            <div class="w-20 h-1 bg-blue-500 rounded mb-12"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Project 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden flex flex-col h-full group">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent z-10 opacity-60">
+                        </div>
+                        <img src="nomadai-thumbnail.png" alt="NomadAI"
+                            class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute bottom-4 left-4 z-20 flex flex-wrap gap-2">
+                            <span
+                                class="text-xs font-semibold px-2 py-1 bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded backdrop-blur-md">Next.js
+                                14</span>
+                            <span
+                                class="text-xs font-semibold px-2 py-1 bg-gray-800/80 text-gray-300 border border-gray-600 rounded backdrop-blur-md">Gemini
+                                AI</span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">NomadAI</h3>
+                        <p class="text-gray-400 text-sm mb-4">AI travel planner using Google Gemini for day-by-day
+                            itineraries, interactive map, Google OAuth.</p>
+
+                        <div class="mb-6">
+                            <h4 class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Highlight</h4>
+                            <p class="text-sm text-gray-300">Integrated Gemini AI to convert free-form
+                                preferences/budget into structured itineraries + live map (React Leaflet).</p>
+                        </div>
+
+                        <div class="mb-6 text-sm text-gray-500 flex flex-wrap gap-x-2 gap-y-1">
+                            <span>React 18</span> · <span>Tailwind</span> · <span>Framer Motion</span> ·
+                            <span>R3F</span> · <span>Supabase</span>
+                        </div>
+
+                        <div class="mt-auto flex gap-3 pt-4 border-t border-gray-800">
+                            <a href="https://ai-trip-planner-woad-eight.vercel.app" target="_blank"
+                                class="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-sm font-medium transition-colors">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                            <a href="https://github.com/rohitvishwaa-ops/AI-Trip-Planner" target="_blank"
+                                class="flex-1 flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-700 text-white py-2 rounded-lg text-sm font-medium transition-colors">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden flex flex-col h-full group">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent z-10 opacity-60">
+                        </div>
+                        <img src="synop-thumbnail.png" alt="SYNOP Decoder"
+                            class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute bottom-4 left-4 z-20 flex flex-wrap gap-2">
+                            <span
+                                class="text-xs font-semibold px-2 py-1 bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 rounded backdrop-blur-md">Python</span>
+                            <span
+                                class="text-xs font-semibold px-2 py-1 bg-green-500/20 text-green-300 border border-green-500/30 rounded backdrop-blur-md">FastAPI</span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">IMD SYNOP Decoder
+                        </h3>
+                        <p class="text-gray-400 text-sm mb-4">Decodes FM-12 SYNOP weather codes into plain English via
+                            CLI + REST API. Built during IMD internship.</p>
+
+                        <div class="mb-6">
+                            <h4 class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Highlight</h4>
+                            <p class="text-sm text-gray-300">Parsed multi-group meteorological code (temp, wind,
+                                pressure, clouds) into structured output, batch processing, JSON/CSV/TXT export.</p>
+                        </div>
+
+                        <div class="mb-6 text-sm text-gray-500 flex flex-wrap gap-x-2 gap-y-1">
+                            <span>Python</span> · <span>FastAPI</span> · <span>Swagger UI</span> · <span>CLI</span>
+                        </div>
+
+                        <div class="mt-auto flex gap-3 pt-4 border-t border-gray-800">
+                            <a href="https://github.com/rohitvishwaa-ops/SYNOP-Data-Decoding-and-API-Development-Using-IMD-Dataset"
+                                target="_blank"
+                                class="w-full flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-700 text-white py-2 rounded-lg text-sm font-medium transition-colors">
+                                <i class="fab fa-github"></i> View Repository
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="glass-card rounded-2xl overflow-hidden flex flex-col h-full group">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent z-10 opacity-60">
+                        </div>
+                        <img src="vitalai-thumbnail.png" alt="VitalAI"
+                            class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute bottom-4 left-4 z-20 flex flex-wrap gap-2">
+                            <span
+                                class="text-xs font-semibold px-2 py-1 bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 rounded backdrop-blur-md">React</span>
+                            <span
+                                class="text-xs font-semibold px-2 py-1 bg-purple-500/20 text-purple-300 border border-purple-500/30 rounded backdrop-blur-md">Machine
+                                Learning</span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">VitalAI</h3>
+                        <p class="text-gray-400 text-sm mb-4">Heart disease risk predictor, Doctor Mode (13 clinical
+                            features) + Patient Mode. Rebuilt from Streamlit.</p>
+
+                        <div class="mb-6">
+                            <h4 class="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Highlight</h4>
+                            <p class="text-sm text-gray-300">Migrated Streamlit app to React/FastAPI preserving logic;
+                                built custom SVG visualizations (gauge, radar, ECG).</p>
+                        </div>
+
+                        <div class="mb-6 text-sm text-gray-500 flex flex-wrap gap-x-2 gap-y-1">
+                            <span>React</span> · <span>FastAPI</span> · <span>Python</span> · <span>scikit-learn</span>
+                        </div>
+
+                        <div class="mt-auto flex gap-3 pt-4 border-t border-gray-800">
+                            <a href="https://github.com/rohitvishwaa-ops/health-predictor" target="_blank"
+                                class="w-full flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-700 text-white py-2 rounded-lg text-sm font-medium transition-colors">
+                                <i class="fab fa-github"></i> View Repository
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="mt-10 text-center">
+                <a href="projects.html"
+                    class="inline-flex items-center gap-2 rounded-lg border border-blue-500/50 bg-blue-500/10 px-6 py-3 font-semibold text-blue-300 transition-colors hover:bg-blue-500 hover:text-white">
+                    View more projects <i class="fas fa-arrow-right text-sm"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Experience Section -->
+    <section id="skills" class="py-24 px-6 lg:px-8 bg-darker/50 relative z-10">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 gap-16 lg:gap-24">
+
+            <!-- Skills -->
+            <div>
+                <h2 class="text-3xl lg:text-4xl font-bold mb-2">Skills</h2>
+                <div class="w-20 h-1 bg-blue-500 rounded mb-10"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Languages -->
+                    <div class="glass-card p-6 rounded-xl">
+                        <div class="flex items-center gap-4 mb-4 text-orange-400">
+                            <i class="fas fa-code text-xl"></i>
+                            <h3 class="text-lg font-bold text-white">Languages</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">Python</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">Java</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">C/C++</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">HTML</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">CSS</span>
+                        </div>
+                    </div>
+
+                    <!-- Frontend -->
+                    <div class="glass-card p-6 rounded-xl">
+                        <div class="flex items-center gap-4 mb-4 text-blue-400">
+                            <i class="fas fa-desktop text-xl"></i>
+                            <h3 class="text-lg font-bold text-white">Frontend</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">React</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">Next.js</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">Tailwind
+                                CSS</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">Framer
+                                Motion</span>
+                        </div>
+                    </div>
+
+                    <!-- Backend -->
+                    <div class="glass-card p-6 rounded-xl">
+                        <div class="flex items-center gap-4 mb-4 text-green-400">
+                            <i class="fas fa-server text-xl"></i>
+                            <h3 class="text-lg font-bold text-white">Backend</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">Node.js</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">FastAPI</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">REST
+                                APIs</span>
+                        </div>
+                    </div>
+
+                    <!-- Database -->
+                    <div class="glass-card p-6 rounded-xl">
+                        <div class="flex items-center gap-4 mb-4 text-purple-400">
+                            <i class="fas fa-database text-xl"></i>
+                            <h3 class="text-lg font-bold text-white">Database & BaaS</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">MongoDB</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">PostgreSQL</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">MySQL</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">Oracle
+                                SQL Plus</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">Firebase</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">Supabase</span>
+                        </div>
+                    </div>
+
+                    <!-- AI & Tools -->
+                    <div class="glass-card p-6 rounded-xl">
+                        <div class="flex items-center gap-4 mb-4 text-pink-400">
+                            <i class="fas fa-tools text-xl"></i>
+                            <h3 class="text-lg font-bold text-white">AI & Tools</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">Claude</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">GPT</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">Gemini
+                                AI</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">Groq</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">VS
+                                Code</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">Antigravity</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">Git</span>
+                            <span
+                                class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md text-sm font-medium border border-gray-700">Vercel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience -->
+            <div id="experience">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-2">Experience</h2>
+                <div class="w-20 h-1 bg-blue-500 rounded mb-10"></div>
+
+                <div class="relative pl-8 border-l border-gray-800 space-y-10">
+                    <div class="relative">
+                        <div
+                            class="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-blue-500 border-4 border-darker">
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Software Developer</h3>
+                        <h4 class="text-blue-400 font-medium mb-1">India Meteorological Department (IMD)</h4>
+                        <p class="text-gray-500 text-sm mb-4">Internship</p>
+
+                        <ul class="space-y-3 text-gray-400 text-sm lg:text-base">
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-500 mt-1 flex-shrink-0"></i>
+                                <span>Built decoder converting raw FM-12 SYNOP codes to plain English, making station
+                                    data usable by non-specialists</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-blue-500 mt-1 flex-shrink-0"></i>
+                                <span>Shipped CLI + REST API (Swagger docs), export to JSON/CSV/TXT</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Placeholder for future experience -->
+                    <div class="relative opacity-50">
+                        <div
+                            class="absolute -left-[41px] top-1 h-5 w-5 rounded-full bg-gray-700 border-4 border-darker">
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-300">Open for Opportunities</h3>
+                        <h4 class="text-gray-400 font-medium mb-1">Full-stack / Frontend Role</h4>
+                        <p class="text-gray-500 text-sm mb-4">Present</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 lg:px-8 relative z-10">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-4xl lg:text-5xl font-bold mb-6">Let's build something.</h2>
+            <p class="text-gray-400 text-lg mb-12 max-w-xl mx-auto">
+                I'm currently looking for new opportunities. Whether you have a question or just want to say hi, my
+                inbox is always open.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="mailto:rohitvishwaa@gmail.com"
+                    class="glass-card flex items-center gap-3 px-6 py-4 rounded-xl hover:text-white transition-colors group">
+                    <i class="fas fa-envelope text-blue-400 text-2xl group-hover:scale-110 transition-transform"></i>
+                    <span class="font-medium">Gmail</span>
+                </a>
+
+                <a href="https://linkedin.com/in/rohitvishwaa" target="_blank"
+                    class="glass-card flex items-center gap-3 px-6 py-4 rounded-xl hover:text-white transition-colors group">
+                    <i class="fab fa-linkedin text-blue-600 text-2xl group-hover:scale-110 transition-transform"></i>
+                    <span class="font-medium">LinkedIn</span>
+                </a>
+
+                <a href="https://github.com/rohitvishwaa-ops" target="_blank"
+                    class="glass-card flex items-center gap-3 px-6 py-4 rounded-xl hover:text-white transition-colors group">
+                    <i class="fab fa-github text-gray-300 text-2xl group-hover:scale-110 transition-transform"></i>
+                    <span class="font-medium">GitHub</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-900 py-8 relative z-10 bg-darker text-center">
+        <p class="text-gray-600 text-sm">
+            Designed & Built by Rohit Vishwaa &copy; 2026
+        </p>
+    </footer>
+
+    <!-- Script for mobile menu -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close menu on link click
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>
